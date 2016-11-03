@@ -1,0 +1,62 @@
+"use strict";
+require('mocha');
+const chai_1 = require('chai');
+const app_vanilla_1 = require('./app-vanilla');
+describe('todo app - tests v1', () => {
+    it('should add new items to empty list', () => {
+        const newItem = 'Buy milk';
+        const elem = document.createElement('div');
+        document.body.innerHTML = '';
+        document.body.appendChild(elem);
+        const app = app_vanilla_1.renderTodoList(elem, []);
+        const addItemInput = app.querySelector('.new-item');
+        addItemInput.value = newItem;
+        const clickEvent = document.createEvent('HTMLEvents');
+        clickEvent.initEvent('click', false, true);
+        app.querySelector('.add').dispatchEvent(clickEvent);
+        const visibleItemsNodes = app.querySelectorAll('.todo-item');
+        const visibleItems = Array.from(visibleItemsNodes).map(e => e.textContent);
+        chai_1.expect(visibleItems).to.eql([newItem]);
+    });
+    it('should create prepopulated lists', () => {
+        const elem = document.createElement('div');
+        document.body.innerHTML = '';
+        document.body.appendChild(elem);
+        const items = ['Angular', 'React', 'Ember'];
+        const app = app_vanilla_1.renderTodoList(elem, items);
+        const visibleItemsNodes = app.querySelectorAll('.todo-item');
+        const visibleItems = Array.from(visibleItemsNodes).map(e => e.textContent);
+        chai_1.expect(visibleItems).to.eql(items);
+    });
+    it('should a counter of pending todo items and increase it when an item is added', () => {
+        const elem = document.createElement('div');
+        document.body.innerHTML = '';
+        document.body.appendChild(elem);
+        const items = ['Angular', 'React', 'Ember'];
+        const app = app_vanilla_1.renderTodoList(elem, items);
+        const currentCount = parseInt(app.querySelector('.count').textContent, 10);
+        chai_1.expect(currentCount).to.equal(items.length);
+        const addItemInput = app.querySelector('.new-item');
+        addItemInput.value = 'Vue.js';
+        const clickEvent = document.createEvent('HTMLEvents');
+        clickEvent.initEvent('click', false, true);
+        app.querySelector('.add').dispatchEvent(clickEvent);
+        const newCount = parseInt(app.querySelector('.count').textContent, 10);
+        chai_1.expect(newCount).to.equal(items.length + 1);
+    });
+    it('should remove items from the list when they are clicked', () => {
+        const elem = document.createElement('div');
+        document.body.innerHTML = '';
+        document.body.appendChild(elem);
+        const items = ['Angular', 'React', 'Ember'];
+        const app = app_vanilla_1.renderTodoList(elem, items);
+        const clickEvent = document.createEvent('HTMLEvents');
+        clickEvent.initEvent('click', false, true);
+        const itemToRemoveIdx = 2;
+        const itemToRemove = items[itemToRemoveIdx];
+        app.querySelectorAll('.todo-item')[itemToRemoveIdx].dispatchEvent(clickEvent);
+        const visibleItemsNodes = app.querySelectorAll('.todo-item');
+        const visibleItems = Array.from(visibleItemsNodes).map(e => e.textContent);
+        chai_1.expect(visibleItems).not.to.include(itemToRemove);
+    });
+});

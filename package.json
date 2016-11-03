@@ -1,0 +1,29 @@
+{
+  "name": "drivers-talk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha dist/test-*.js --require test-setup.js",
+    "tdd": "mocha dist/test-*.js --require test-setup.js --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/angular": "^1.5.19",
+    "@types/chai": "^3.4.34",
+    "@types/jsdom": "^2.0.29",
+    "@types/mocha": "^2.2.32",
+    "@types/react": "^0.14.44",
+    "@types/react-addons-test-utils": "^0.14.15",
+    "@types/react-dom": "^0.14.18",
+    "angular": "^1.5.8",
+    "chai": "^3.5.0",
+    "jsdom": "^9.8.3",
+    "mocha": "^3.1.2",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "tape": "^4.6.2"
+  }
+}
