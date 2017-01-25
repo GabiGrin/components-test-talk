@@ -1,6 +1,6 @@
 "use strict";
-const app_react_1 = require('./app-react');
-const react_addons_test_utils_1 = require('react-addons-test-utils');
+const app_react_1 = require("./app-react");
+const react_addons_test_utils_1 = require("react-addons-test-utils");
 class TodoAppDriver {
     constructor(elem) {
         this.elem = elem;

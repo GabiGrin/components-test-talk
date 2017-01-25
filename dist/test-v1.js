@@ -1,7 +1,7 @@
 "use strict";
-require('mocha');
-const chai_1 = require('chai');
-const app_vanilla_1 = require('./app-vanilla');
+require("mocha");
+const chai_1 = require("chai");
+const app_vanilla_1 = require("./app-vanilla");
 describe('todo app - tests v1', () => {
     it('should add new items to empty list', () => {
         const newItem = 'Buy milk';

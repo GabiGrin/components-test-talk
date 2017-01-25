@@ -1,7 +1,7 @@
 "use strict";
-require('mocha');
-const chai_1 = require('chai');
-const app_vanilla_1 = require('./app-vanilla');
+require("mocha");
+const chai_1 = require("chai");
+const app_vanilla_1 = require("./app-vanilla");
 describe('todo app - tests v2', () => {
     const renderApp = (items = []) => {
         const elem = document.createElement('div');

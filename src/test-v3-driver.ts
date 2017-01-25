@@ -1,3 +1,4 @@
+import {renderTodoList} from './app';
 import TodoAppDriver from './vanilla-driver';
 // import TodoAppDriver from './react-driver';
 
@@ -6,40 +7,48 @@ import {expect} from 'chai';
 
 describe.only('todo app - tests v3 - driver', () => {
 
+const createAppAndWrapWithDriver = (items= []) => {
+	const elem = document.createElement('div');
+	document.body.innerHTML = '';
+	document.body.appendChild(elem);
+	renderTodoList(elem, items);
+	return new TodoAppDriver(elem);
+}
+
 it('should add new items to empty list', () => {
 	const newItem = 'Buy milk';
-	const comp = TodoAppDriver.create();
+	const driver = createAppAndWrapWithDriver();
 
-	comp.addItem(newItem);
-	expect(comp.getVisibleItems()).to.eql([newItem]);
+	driver.addItem(newItem);
+	expect(driver.getVisibleItems()).to.eql([newItem]);
 });
 
 it('should create prepopulated lists', () => {
 	const items = ['Angular', 'React', 'Ember'];
-	const comp = TodoAppDriver.create(items);
+	const driver = createAppAndWrapWithDriver(items);
 
-	expect(comp.getVisibleItems()).to.eql(items);
+	expect(driver.getVisibleItems()).to.eql(items);
 });
 
 it('should show a counter of pending todo items and increase it when an item is added', () => {
 	const items = ['Angular', 'React', 'Ember'];
-	const comp = TodoAppDriver.create(items);
+	const driver = createAppAndWrapWithDriver(items);
 
-	expect(comp.getCount()).to.equal(items.length);
+	expect(driver.getCount()).to.equal(items.length);
 
-	comp.addItem('Vue.js');
+	driver.addItem('Vue.js');
 
-	expect(comp.getCount()).to.equal(items.length + 1);
+	expect(driver.getCount()).to.equal(items.length + 1);
 });
 
 it('should remove items from the list when they are clicked', () => {
 	const items = ['Angular', 'React', 'Ember'];
-	const comp = TodoAppDriver.create(items);
+	const driver = createAppAndWrapWithDriver(items);
 	const itemToRemove = items[2];
 
-	comp.deleteItem(itemToRemove);
+	driver.deleteItem(itemToRemove);
 
-	expect(comp.getVisibleItems()).not.to.include(itemToRemove);
+	expect(driver.getVisibleItems()).not.to.include(itemToRemove);
 });
 
 });

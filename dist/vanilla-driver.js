@@ -1,5 +1,5 @@
 "use strict";
-const app_vanilla_1 = require('./app-vanilla');
+const app_vanilla_1 = require("./app-vanilla");
 const clickOn = element => {
     const clickEvent = document.createEvent('HTMLEvents');
     clickEvent.initEvent('click', false, true);

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha dist/test-*.js --require test-setup.js",
+    "test": "tsc --project . && mocha dist/test-*.js --require test-setup.js",
     "tdd": "mocha dist/test-*.js --require test-setup.js --watch"
   },
   "author": "",
